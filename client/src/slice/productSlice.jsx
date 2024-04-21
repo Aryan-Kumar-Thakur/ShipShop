@@ -27,7 +27,7 @@ import {
     DELETE_REVIEW_SUCCESS,
     DELETE_REVIEW_FAIL,
     DELETE_REVIEW_RESET,
-  } from "../constants/productConstants";
+} from "../constants/productConstants";
 
 
 const initialState = {
@@ -69,23 +69,30 @@ export const productDetailsSlice = createSlice({
         loading: false,
         error: null
     },
-    reducers:{
-        PRODUCT_DETAILS_REQUEST: (state)=>{
-            state.loading= true;
+    reducers: {
+        PRODUCT_DETAILS_REQUEST: (state) => {
+            state.loading = true;
+            state.product = {};
+            state.error = null;
         },
-        PRODUCT_DETAILS_SUCCESS: (state,action)=>{
-            state.loading= false;
-            state.product= action.payload
+        PRODUCT_DETAILS_SUCCESS: (state, action) => {
+            state.loading = false;
+            state.product = action.payload.product
+            // console.log(state.product)
         },
-        PRODUCT_DETAILS_FAIL:(state,action)=>{
-            state.loading= false;
-            state.error= action.payload;
+        PRODUCT_DETAILS_FAIL: (state, action) => {
+            state.loading = false;
+            state.product = {};
+            state.error = action.payload;
         }
     }
 })
 
-export const { ALL_PRODUCT_REQUEST , ALL_PRODUCT_SUCCESS , ALL_PRODUCT_FAIL, CLEAR_ERRORS } = productsSlice.actions;
-export const { PRODUCT_DETAILS_REQUEST , PRODUCT_DETAILS_SUCCESS , PRODUCT_DETAILS_FAIL } = productDetailsSlice.actions;
 
-export const productsReducer =  productsSlice.reducer;
-export const productDetailsReducer =  productDetailsSlice.reducer;
+const productsReducer = productsSlice.reducer;
+const productDetailsReducer = productDetailsSlice.reducer;
+
+export const { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, CLEAR_ERRORS } = productsSlice.actions;
+export const { PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL } = productDetailsSlice.actions;
+
+export {productsReducer , productDetailsReducer}

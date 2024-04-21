@@ -38,7 +38,7 @@
 .banner::after {
     content: "";
     width: 100vw;
-    height: 100vmin;
+    height: 105vmin;
     background-color: #ffffff;
     position: absolute;
     top: 12%;

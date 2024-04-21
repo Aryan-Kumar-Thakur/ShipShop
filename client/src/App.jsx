@@ -5,7 +5,8 @@ import Header from "./components/layout/Header/Header"
 import Footer from "./components/layout/Footer/Footer"
 import Home from './components/Home/Home'
 import Contact from '../Pages/Contact'
-import Products from '../Pages/Products'
+import Products from './components/Product/Products'
+import ProductDetails from './components/Product/ProductDetails'
 
 const App = () => {
   useEffect(()=>{
@@ -23,7 +24,8 @@ const App = () => {
       <Header/>
         <Routes>
           <Route path="/" element={<Home/>}></Route>
-          <Route path="/product" element={<Products/>}></Route>
+          <Route path="/product/:id" element={<ProductDetails/>}></Route>
+          <Route path="/products" element={<Products/>}></Route>
           <Route path="/contact" element={<Contact/>}></Route>
           <Route path="/about" element={<Header/>}></Route>
           <Route path="/search" element={<Header/>}></Route>

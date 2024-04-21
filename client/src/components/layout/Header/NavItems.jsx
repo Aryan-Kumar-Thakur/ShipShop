@@ -24,7 +24,7 @@ const NavItems = [
     },
     {
         title:"Products",
-        url:"/product"
+        url:"/products"
     },
     {
         title:"Contact",
