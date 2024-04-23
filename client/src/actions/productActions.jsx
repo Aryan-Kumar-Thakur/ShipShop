@@ -4,12 +4,14 @@ import {PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_SUCCESS} 
 
 const API_URI = "http://localhost:8000/api/v1";
 
-export const getProducts = () => {
+export const getProducts = (keyword = "",currentPage=1) => {
   return async (dispatch) => {
       try {
           dispatch(ALL_PRODUCT_REQUEST());
 
-          const { data } = await axios.get(`${API_URI}/products`);
+          let link = `${API_URI}/products?keyword=${keyword}&page=${currentPage}`
+          
+          const { data } = await axios.get(link);
 
           dispatch(ALL_PRODUCT_SUCCESS(data));
       } catch (error) {

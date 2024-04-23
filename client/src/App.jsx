@@ -7,6 +7,7 @@ import Home from './components/Home/Home'
 import Contact from '../Pages/Contact'
 import Products from './components/Product/Products'
 import ProductDetails from './components/Product/ProductDetails'
+import Search from './components/Product/Search'
 
 const App = () => {
   useEffect(()=>{
@@ -26,9 +27,10 @@ const App = () => {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/product/:id" element={<ProductDetails/>}></Route>
           <Route path="/products" element={<Products/>}></Route>
+          <Route path="/products/:keyword" element={<Products/>}></Route>
           <Route path="/contact" element={<Contact/>}></Route>
           <Route path="/about" element={<Header/>}></Route>
-          <Route path="/search" element={<Header/>}></Route>
+          <Route path="/search" element={<Search/>}></Route>
           <Route path="/cart" element={<Header/>}></Route>
           <Route path="/profile" element={<Header/>}></Route>
         </Routes>

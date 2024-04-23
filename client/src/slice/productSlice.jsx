@@ -78,7 +78,6 @@ export const productDetailsSlice = createSlice({
         PRODUCT_DETAILS_SUCCESS: (state, action) => {
             state.loading = false;
             state.product = action.payload.product
-            // console.log(state.product)
         },
         PRODUCT_DETAILS_FAIL: (state, action) => {
             state.loading = false;
