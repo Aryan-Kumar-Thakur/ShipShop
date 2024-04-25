@@ -209,6 +209,10 @@
     font: 300 1vmax cursive;
 }
 
+.reviewReading{
+    margin-left: 2vw;
+}
+
 .noReviews {
     font: 400 1.3vmax "Gill Sans";
     text-align: center;

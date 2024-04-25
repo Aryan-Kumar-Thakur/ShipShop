@@ -4,12 +4,16 @@ import {PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_SUCCESS} 
 
 const API_URI = "http://localhost:8000/api/v1";
 
-export const getProducts = (keyword = "",currentPage=1) => {
+export const getProducts = (keyword = "",currentPage=1,price = [0,25000], category, ratings = 0) => {
   return async (dispatch) => {
       try {
           dispatch(ALL_PRODUCT_REQUEST());
 
-          let link = `${API_URI}/products?keyword=${keyword}&page=${currentPage}`
+          let link = `${API_URI}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
+
+          if(category){
+            link = `${API_URI}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
+          }
           
           const { data } = await axios.get(link);
 

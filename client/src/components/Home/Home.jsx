@@ -14,7 +14,7 @@ const Home = () => {
 
   const alert = useAlert()
   const dispatch = useDispatch()
-  const { loading, error, products, productCount } = useSelector(
+  const { loading, error, products } = useSelector(
     (state) => state.products
   )
 
@@ -30,7 +30,7 @@ const Home = () => {
     <>
       {loading ? <Loader/> :
         <>
-          <MetaData title="ShipSHop" />
+          <MetaData title="SHIPSHOP" />
           <div className="banner">
             <p>Welcome to ShipShop</p>
             <h1>FIND AMAZING PRODUCTS BELOW</h1>

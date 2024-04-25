@@ -50,6 +50,7 @@ export const productsSlice = createSlice({
             state.products = action.payload.products;
             state.productsCount = action.payload.productsCount;
             state.resultPerPage = action.payload.resultPerPage;
+            state.filteredProductsCount = action.payload.filteredProductsCount;
         },
         ALL_PRODUCT_FAIL: (state, action) => {
             state.loading = false;

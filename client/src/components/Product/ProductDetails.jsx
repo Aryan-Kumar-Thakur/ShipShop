@@ -10,6 +10,7 @@ import ReviewCard from './ReviewCard.jsx'
 import Loader from '../layout/loader/Loader.jsx'
 import {useAlert} from "react-alert"
 import { CLEAR_ERRORS } from '../../slice/productSlice.jsx'
+import MetaData from '../layout/MetaData.jsx'
 
 const productDetails = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const productDetails = () => {
     <>
       {loading ? (<Loader />) : (
         <>
+        <MetaData title={`${product.name} -- SHIPSHOP`}></MetaData>
           <div className="ProductDetails">
             <div>
               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import "./search.css"
 import { useNavigate } from 'react-router-dom';
+import MetaData from '../layout/MetaData';
 
 const Search = () => {
 
@@ -18,6 +19,7 @@ const Search = () => {
     }
   return (
     <>
+    <MetaData title="Search A Product -- SHIPSHOP"></MetaData>
         <form className='searchBox' onSubmit={searchSubmitHandler}>
             <input type="text" placeholder='Search a Produt ...'
              onChange={(e)=>setKeyWord(e.target.value)} />

@@ -1,3 +1,7 @@
+.products-page{
+  min-height: 60vh;
+}
+
 .productsHeading {
   margin: 2vmax auto;
   width: 15vw;
@@ -14,6 +18,7 @@
   padding: 0 5vmax;
   justify-content: center;
   min-height: 30vh;
+  margin-left: 8.7vmax;
 }
 
 .paginationBox {
@@ -66,4 +71,60 @@
 
 .pageLinkActive {
   color: white;
+}
+
+.filterBox {
+  width: 10vmax;
+  position: absolute;
+  top: 20vmax;
+  left: 3vmax;
+}
+
+.categoryBox {
+  padding: 0%;
+}
+
+.category-link {
+  list-style: none;
+  color: rgba(0, 0, 0, 0.61);
+  font: 400 1vmax "Roboto";
+  margin: 0.4vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.category-link:hover {
+  color: tomato;
+}
+
+.filterBox>fieldset {
+  text-align: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.329);
+}
+
+.ratingFilter{
+  padding: 0px 1vw;
+}
+
+
+@media screen and (max-width: 600px) {
+
+  .products {
+    margin-left: 0vmax;
+  }
+
+  .filterBox {
+    width: 20vmax;
+    position: static;
+    margin: auto;
+  }
+
+  .page-link {
+    font: 300 1.7vmax "Roboto";
+  }
+
+  .category-link {
+    font: 400 2vmax "Roboto";
+  }
 }
