@@ -4,8 +4,17 @@ import './header.css'
 import { NavLink } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RxCross1 } from 'react-icons/rx'
+import UserOptions from './UserOptions';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const { isAuthenticated, user } = useSelector(
+    (state) => state.user
+  )
+
   const [clicked, setClicked] = useState(false)
   const hide = () => {
     setClicked(false)
@@ -42,7 +51,15 @@ const Header = () => {
         </div>
         <ul className='right-menu'>
           {AllNavicons}
+          {!isAuthenticated &&
+            <li onClick={hide}>
+              <NavLink exact="true" to="/login" activeclassname="active"><FaUserCircle/></NavLink>
+            </li>
+          }
         </ul>
+        {isAuthenticated && <div className="right-icon">
+          <UserOptions user={user} />
+        </div>}
       </div>
     </nav>
   )

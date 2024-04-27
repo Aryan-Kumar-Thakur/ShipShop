@@ -2,12 +2,23 @@ import express from 'express'
 import cookieParser from "cookie-parser";
 import errorMiddleware from './middleware/error.js';
 import cors from "cors"
+import bodyParser from 'body-parser';
+import fileUpload from 'express-fileupload';
 
 const app=express();
 
-app.use(cors({ origin: 'http://localhost:5173' }));
-app.use(express.json())
 app.use(cookieParser())
+app.use(express.json())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(fileUpload())
+
+app.use(cors({
+    origin: 'http://localhost:5173', //allow request only from these site
+    methods: ["GET","POST","PUT","DELETE"],
+    credentials: true, //for getting cookies and other headers from backend
+    samesite : "none",
+    secure: true,
+}))
 
 
 //Route Import

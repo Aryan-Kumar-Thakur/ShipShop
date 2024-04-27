@@ -10,10 +10,10 @@ const NavIcons = [
         logo: <FaShoppingCart/>,
         url: "/cart"
     },
-    {
-        logo: <FaUserCircle/>,
-        url: "/profile"
-    }
+    // {
+    //     logo: <FaUserCircle/>,
+    //     url: "/login"
+    // }
 ]
 
 

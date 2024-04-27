@@ -4,17 +4,24 @@ import catchAsyncError from "../middleware/catchAsyncError.js";
 import sendToken from "../utils/jwttoken.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from 'crypto'
+import cloudinary from "cloudinary"
 
 //Register a user
 
 const registerUser = catchAsyncError(async (req, res, next) => {
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar , {
+        folder: "avatars",
+        width: 150,
+        crop: "scale"
+    })
     const { name, email, password } = req.body
 
     const newUser = await User.create({
         name, email, password,
         avatar: {
-            public_id: "this is a sample id",
-            url: "profilepicture"
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
         }
     })
 
@@ -126,7 +133,6 @@ const resetPassword = catchAsyncError(async(req,res,next)=>{
 
 const getUserDetails = catchAsyncError(async (req,res,next)=>{
     const user = await User.findById(req.user.id).select("+password")
-
 
 
     res.status(200).json({

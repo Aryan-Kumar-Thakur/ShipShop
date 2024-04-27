@@ -8,14 +8,22 @@ import Contact from '../Pages/Contact'
 import Products from './components/Product/Products'
 import ProductDetails from './components/Product/ProductDetails'
 import Search from './components/Product/Search'
+import LoginSignUp from './components/User/LoginSignUp'
+import store from "./store/store"
+import { loadUser } from './actions/userActions'
+import { useSelector } from 'react-redux'
+// import UserOptions from './components/layout/Header/UserOptions'
 
 const App = () => {
+
   useEffect(()=>{
     webFont.load({
       google:{
         families: ["Roboto","Droid Sans","Chilanka"]
       }
     })
+
+    store.dispatch(loadUser());
   },[])
 
   return (
@@ -32,7 +40,8 @@ const App = () => {
           <Route path="/about" element={<Header/>}></Route>
           <Route path="/search" element={<Search/>}></Route>
           <Route path="/cart" element={<Header/>}></Route>
-          <Route path="/profile" element={<Header/>}></Route>
+          <Route path="/login" element={<LoginSignUp/>}></Route>
+          <Route path="/password/forgot" element={<LoginSignUp/>}></Route>
         </Routes>
         <Footer/>
         </BrowserRouter>

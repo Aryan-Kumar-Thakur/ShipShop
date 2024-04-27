@@ -31,8 +31,6 @@ export const getProductsDetails = (id) => {
 
           const { data } = await axios.get(`${API_URI}/product/${id}`);
 
-          // console.log(data);
-
           dispatch(PRODUCT_DETAILS_SUCCESS(data));
       } catch (error) {
           dispatch(PRODUCT_DETAILS_FAIL(error.response.data.message));

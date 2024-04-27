@@ -18,12 +18,18 @@ nav {
     width: 60%;
 }
 
+
 .right-menu {
     list-style: none;
     display: flex;
     justify-content: end;
     align-items: flex-end;
-    width: 40%;
+    width: 35%;
+}
+
+.right-icon {
+    width: 10%;
+    align-items: end;
 }
 
 .right-menu li a {
@@ -33,6 +39,17 @@ nav {
     padding: 5px 10px;
     margin-left: 20px;
     font-size: 2rem;
+}
+
+
+.right-icon li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 100;
+    font-size: 2.5rem;
+    position: fixed;
+    right: 3vmax;
+    top: 1.2vmax;
 }
 
 /* .navbar2 {
@@ -93,6 +110,18 @@ nav {
     transition: all 0.1s ease-in-out;
 }
 
+.speedDial {
+    position: absolute;
+    right: 3vmax;
+    top: 1.5vmax;
+}
+
+.speedDialIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+}
+
 
 
 @media screen and (max-width: 1100px) {
@@ -113,6 +142,17 @@ nav {
 
     .left-menu {
         flex-direction: column;
+    }
+
+    .right-menu {
+        display: flex;
+        justify-content: end;
+        align-items: flex-end;
+        width: 40%;
+    }
+
+    .right-icon li a{
+        right: 5vmax;
     }
 
     .logo {
@@ -158,6 +198,12 @@ nav {
         position: fixed;
         right: -100%;
         transition: all 0.5s ease-out;
+    }
+
+    .speedDial {
+        position: fixed;
+        right: 3vmax;
+        top: 2.5vmax;
     }
 
 }
