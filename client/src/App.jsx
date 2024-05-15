@@ -12,38 +12,47 @@ import LoginSignUp from './components/User/LoginSignUp'
 import store from "./store/store"
 import { loadUser } from './actions/userActions'
 import { useSelector } from 'react-redux'
-// import UserOptions from './components/layout/Header/UserOptions'
+import Profile from './components/User/Profile'
+import ProtectedRoute from './components/Route/ProtectedRoute'
+import UpdateProfile from './components/User/UpdateProfile'
+import UpdatePassword from './components/User/UpdatePassword'
+import ForgotPassword from './components/User/ForgotPassword'
+import ResetPassword from './components/User/ResetPassword'
 
 const App = () => {
 
-  useEffect(()=>{
+  useEffect(() => {
     webFont.load({
-      google:{
-        families: ["Roboto","Droid Sans","Chilanka"]
+      google: {
+        families: ["Roboto", "Droid Sans", "Chilanka"]
       }
     })
 
     store.dispatch(loadUser());
-  },[])
+  }, [])
 
   return (
     <>
       <div className="body">
-      <BrowserRouter>
-      <Header/>
-        <Routes>
-          <Route path="/" element={<Home/>}></Route>
-          <Route path="/product/:id" element={<ProductDetails/>}></Route>
-          <Route path="/products" element={<Products/>}></Route>
-          <Route path="/products/:keyword" element={<Products/>}></Route>
-          <Route path="/contact" element={<Contact/>}></Route>
-          <Route path="/about" element={<Header/>}></Route>
-          <Route path="/search" element={<Search/>}></Route>
-          <Route path="/cart" element={<Header/>}></Route>
-          <Route path="/login" element={<LoginSignUp/>}></Route>
-          <Route path="/password/forgot" element={<LoginSignUp/>}></Route>
-        </Routes>
-        <Footer/>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/product/:id" element={<ProductDetails />}></Route>
+            <Route path="/products" element={<Products />}></Route>
+            <Route path="/products/:keyword" element={<Products />}></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/about" element={<Header />}></Route>
+            <Route path="/search" element={<Search />}></Route>
+            <Route path="/cart" element={<Header />}></Route>
+            <Route path="/account" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
+            <Route path="/me/update" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>}></Route>
+            <Route path="/password/update" element={<ProtectedRoute><UpdatePassword /></ProtectedRoute>}></Route>
+            <Route path='/password/forgot' element={<ForgotPassword/>}></Route>
+            <Route path='/password/reset/:token' element={<ResetPassword/>}></Route>
+            <Route path="/login" element={<LoginSignUp />}></Route>
+          </Routes>
+          <Footer />
         </BrowserRouter>
       </div>
     </>

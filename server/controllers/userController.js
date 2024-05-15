@@ -10,7 +10,7 @@ import cloudinary from "cloudinary"
 
 const registerUser = catchAsyncError(async (req, res, next) => {
 
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar , {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: "avatars",
         width: 150,
         crop: "scale"
@@ -51,33 +51,33 @@ const loginUser = catchAsyncError(async (req, res, next) => {
 
 //logout user
 
-const logoutUser = catchAsyncError(async(req,res,next)=>{
+const logoutUser = catchAsyncError(async (req, res, next) => {
 
-    res.cookie("token",null,{
+    res.cookie("token", null, {
         expires: new Date(Date.now()),
         httpOnly: true
     })
     res.status(200).json({
-        success:true,
+        success: true,
         message: "logout successfully"
     })
-}) 
+})
 
 
 //forgot password
 
-const forgotPassword = catchAsyncError(async(req,res,next)=>{
-    const user = await User.findOne({email : req.body.email})
-    if(!user){
-        return next(new ErrorHandler("user not found",404))
+const forgotPassword = catchAsyncError(async (req, res, next) => {
+    const user = await User.findOne({ email: req.body.email })
+    if (!user) {
+        return next(new ErrorHandler("user not found", 404))
     }
 
     //get reset password token
     const resetToken = user.getResetPasswordToken();
 
-    await user.save({validateBeforeSave: false});
+    await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you are not requested this email then, please ignore it `;
 
@@ -93,45 +93,46 @@ const forgotPassword = catchAsyncError(async(req,res,next)=>{
             success: true,
             message: `Email send to ${user.email} successfully`
         })
-        
+
     } catch (err) {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
-        await user.save({validateBeforeSave: false});
-        return next(new ErrorHandler(err.message,500));
+        await user.save({ validateBeforeSave: false });
+        return next(new ErrorHandler(err.message, 500));
     }
 })
 
 // Reset Password
-const resetPassword = catchAsyncError(async(req,res,next)=>{
+const resetPassword = catchAsyncError(async (req, res, next) => {
 
     //creating token hash
     const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex")
 
     const user = await User.findOne({
         resetPasswordToken,
-        resetPasswordExpire: {$gt: Date.now()},
+        resetPasswordExpire: { $gt: Date.now() },
     })
 
-    if(!user){
-        return next(new ErrorHandler("Reset Password Token is Invalid or Has Been Expired",400))
+    if (!user) {
+        return next(new ErrorHandler("Reset Password Token is Invalid or Has Been Expired", 400))
     }
 
-    if(req.body.password !== req.body.confirmPassword){
-        return next(new ErrorHandler("Password and Confirm Password does not matched",400))
+
+    if (req.body.password !== req.body.confirmPassword) {
+        return next(new ErrorHandler("Password and Confirm Password does not matched", 400))
     }
 
     user.password = req.body.password;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined
     await user.save();
-    sendToken(user,200,res)
+    sendToken(user, 200, res)
 
 })
 
 //Get User Details
 
-const getUserDetails = catchAsyncError(async (req,res,next)=>{
+const getUserDetails = catchAsyncError(async (req, res, next) => {
     const user = await User.findById(req.user.id).select("+password")
 
 
@@ -143,7 +144,7 @@ const getUserDetails = catchAsyncError(async (req,res,next)=>{
 
 // Update User Password
 
-const updatePassword = catchAsyncError(async (req,res,next)=>{
+const updatePassword = catchAsyncError(async (req, res, next) => {
     const user = await User.findById(req.user.id).select("+password")
 
     const isMatched = await user.comparePassword(req.body.oldPassword)
@@ -152,28 +153,48 @@ const updatePassword = catchAsyncError(async (req,res,next)=>{
         return next(new ErrorHandler("Old Password is Incorrect", 400))
     }
 
-    if(req.body.newPassword !== req.body.confirmPassword){
-        return next(new ErrorHandler("Password and Confirm Password does not match",400))
+    if (req.body.newPassword !== req.body.confirmPassword) {
+        return next(new ErrorHandler("Password and Confirm Password does not match", 400))
     }
 
     user.password = req.body.newPassword
 
     await user.save()
 
-    sendToken(user,200,res)
+    sendToken(user, 200, res)
 })
 
 // Update User Profile
 
-const updateProfile= catchAsyncError(async (req,res,next)=>{
+const updateProfile = catchAsyncError(async (req, res, next) => {
     const newUser = {
         name: req.body.name,
         email: req.body.email,
     }
 
-    //we will add cloudnary later
+    //we will add cloudnary here
 
-    const user = await User.findByIdAndUpdate(req.user.id,newUser,{
+    if (req.body.avatar !== "") {
+        const user = await User.findById(req.user.id)
+
+        const imageId = user.avatar.public_id
+
+        await cloudinary.v2.uploader.destroy(imageId);
+
+    }
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale"
+    })
+
+    newUser.avatar = {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+    }
+
+    const user = await User.findByIdAndUpdate(req.user.id, newUser, {
         new: true,
         validator: true,
         useFindAndModify: false
@@ -187,33 +208,33 @@ const updateProfile= catchAsyncError(async (req,res,next)=>{
 
 // Get all users for admin
 
-const getAllUser = catchAsyncError(async(req,res,next)=>{
+const getAllUser = catchAsyncError(async (req, res, next) => {
     const users = await User.find()
 
     res.status(200).json({
-        success:true,
+        success: true,
         users
     })
 })
 
 // get single user for admin
 
-const getSingleUser = catchAsyncError(async(req,res,next)=>{
+const getSingleUser = catchAsyncError(async (req, res, next) => {
     const user = await User.findById(req.params.id)
 
-    if(!user){
-        return next(new ErrorHandler(`User Not Found with id ${req.parems.id}`,400))
+    if (!user) {
+        return next(new ErrorHandler(`User Not Found with id ${req.parems.id}`, 400))
     }
 
     res.status(200).json({
-        success:true,
+        success: true,
         user
     })
 })
 
 // Update User Profile by Admin
 
-const updateUserRole= catchAsyncError(async (req,res,next)=>{
+const updateUserRole = catchAsyncError(async (req, res, next) => {
     const newUser = {
         name: req.body.name,
         email: req.body.email,
@@ -222,7 +243,7 @@ const updateUserRole= catchAsyncError(async (req,res,next)=>{
 
     //we will add cloudnary later
 
-    const user = await User.findByIdAndUpdate(req.params.id,newUser,{
+    const user = await User.findByIdAndUpdate(req.params.id, newUser, {
         new: true,
         validator: true,
         useFindAndModify: false
@@ -236,12 +257,12 @@ const updateUserRole= catchAsyncError(async (req,res,next)=>{
 
 //Delete user by admin
 
-const deleteUser = (catchAsyncError(async(req,res,next)=>{
+const deleteUser = (catchAsyncError(async (req, res, next) => {
 
     const user = await User.findById(req.params.id)
 
-    if(!user){
-        return next(new ErrorHandler(`User Not Found with id ${req.parems.id}`,400))
+    if (!user) {
+        return next(new ErrorHandler(`User Not Found with id ${req.parems.id}`, 400))
     }
 
     //we will remove cloudnary later
@@ -257,4 +278,4 @@ const deleteUser = (catchAsyncError(async(req,res,next)=>{
 
 
 export default registerUser
-export { loginUser , logoutUser , forgotPassword , resetPassword , getUserDetails , updatePassword , updateProfile ,getSingleUser , getAllUser , updateUserRole , deleteUser}
+export { loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updatePassword, updateProfile, getSingleUser, getAllUser, updateUserRole, deleteUser }

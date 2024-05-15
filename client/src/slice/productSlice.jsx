@@ -1,35 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-import {
-    ADMIN_PRODUCT_REQUEST,
-    ADMIN_PRODUCT_SUCCESS,
-    ADMIN_PRODUCT_FAIL,
-    NEW_PRODUCT_REQUEST,
-    NEW_PRODUCT_SUCCESS,
-    NEW_PRODUCT_FAIL,
-    NEW_PRODUCT_RESET,
-    UPDATE_PRODUCT_REQUEST,
-    UPDATE_PRODUCT_SUCCESS,
-    UPDATE_PRODUCT_FAIL,
-    UPDATE_PRODUCT_RESET,
-    DELETE_PRODUCT_REQUEST,
-    DELETE_PRODUCT_SUCCESS,
-    DELETE_PRODUCT_FAIL,
-    DELETE_PRODUCT_RESET,
-    NEW_REVIEW_REQUEST,
-    NEW_REVIEW_SUCCESS,
-    NEW_REVIEW_FAIL,
-    NEW_REVIEW_RESET,
-    ALL_REVIEW_REQUEST,
-    ALL_REVIEW_SUCCESS,
-    ALL_REVIEW_FAIL,
-    DELETE_REVIEW_REQUEST,
-    DELETE_REVIEW_SUCCESS,
-    DELETE_REVIEW_FAIL,
-    DELETE_REVIEW_RESET,
-} from "../constants/productConstants";
-
-
 const initialState = {
     products: [],
     loading: false,
@@ -102,19 +72,19 @@ export const productSlice = createSlice({
         UPDATE_PRODUCT_REQUEST: (state) => {
             state.loading = true;
         },
-        DELETE_PRODUCT_SUCCESS: (state,action) => {
+        DELETE_PRODUCT_SUCCESS: (state, action) => {
             state.loading = false;
             state.isDeleted = action.payload;
         },
-        UPDATE_PRODUCT_SUCCESS: (state,action) => {
+        UPDATE_PRODUCT_SUCCESS: (state, action) => {
             state.loading = false;
             state.isUpdated = action.payload;
         },
-        DELETE_PRODUCT_FAIL: (state,action) => {
+        DELETE_PRODUCT_FAIL: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
-        UPDATE_PRODUCT_FAIL: (state,action) => {
+        UPDATE_PRODUCT_FAIL: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -157,18 +127,18 @@ export const newReviewSlice = createSlice({
         error: null
     },
     reducers: {
-        NEW_REVIEW_REQUEST: (state) =>{
+        NEW_REVIEW_REQUEST: (state) => {
             state.loading = true;
         },
-        NEW_REVIEW_SUCCESS: (state,action) =>{
+        NEW_REVIEW_SUCCESS: (state, action) => {
             state.loading = false;
             state.success = action.payload;
         },
-        NEW_REVIEW_FAIL: (state,action) =>{
+        NEW_REVIEW_FAIL: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
-        NEW_REVIEW_RESET: (action) =>{
+        NEW_REVIEW_RESET: (action) => {
             state.success = false;
         }
     }
@@ -185,11 +155,11 @@ export const productReviewsSlice = createSlice({
         ALL_REVIEW_REQUEST: (state) => {
             state.loading = true;
         },
-        ALL_REVIEW_SUCCESS: (state,action) => {
+        ALL_REVIEW_SUCCESS: (state, action) => {
             state.loading = false;
             state.reviews = action.payload;
         },
-        ALL_REVIEW_FAIL : (state,action) => {
+        ALL_REVIEW_FAIL: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         }
@@ -203,18 +173,18 @@ export const reviewSlice = createSlice({
         error: null,
     },
     reducers: {
-        DELETE_REVIEW_REQUEST: (state) =>{
+        DELETE_REVIEW_REQUEST: (state) => {
             state.loading = true;
         },
-        DELETE_REVIEW_REQUEST: (state,action) =>{
+        DELETE_REVIEW_REQUEST: (state, action) => {
             state.loading = false,
-            state.isDeleted = action.payload
+                state.isDeleted = action.payload
         },
-        DELETE_REVIEW_FAIL: (state,action) =>{
+        DELETE_REVIEW_FAIL: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
-        DELETE_REVIEW_RESET: (state) =>{
+        DELETE_REVIEW_RESET: (state) => {
             state.isDeleted = false;
         }
     }
@@ -222,7 +192,24 @@ export const reviewSlice = createSlice({
 
 
 export const productsReducer = productsSlice.reducer;
+export const newProductReducer = newProductSlice.reducer;
+export const productReducer = productSlice.reducer;
 export const productDetailsReducer = productDetailsSlice.reducer;
+export const newReviewReducer = newReviewSlice.reducer
+export const productReviewsReducer = productReviewsSlice.reducer
+export const reviewReducer = reviewSlice.reducer
 
 export const { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, CLEAR_ERRORS } = productsSlice.actions;
+
+export const { NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL, NEW_PRODUCT_RESET } = newProductSlice.actions;
+
+export const { UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS, UPDATE_PRODUCT_FAIL, UPDATE_PRODUCT_RESET,
+    DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL, DELETE_PRODUCT_RESET } = productSlice.actions
+
 export const { PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL } = productDetailsSlice.actions;
+
+export const { NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, NEW_REVIEW_FAIL, NEW_REVIEW_RESET } = newReviewSlice.actions
+
+export const { ALL_REVIEW_REQUEST, ALL_REVIEW_SUCCESS, ALL_REVIEW_FAIL } = productReviewsSlice.actions
+
+export const { DELETE_REVIEW_REQUEST, DELETE_REVIEW_SUCCESS, DELETE_REVIEW_FAIL, DELETE_REVIEW_RESET } = reviewSlice.actions

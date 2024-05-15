@@ -201,7 +201,7 @@ nav {
     }
 
     .speedDial {
-        position: fixed;
+        position: absolute;
         right: 3vmax;
         top: 2.5vmax;
     }

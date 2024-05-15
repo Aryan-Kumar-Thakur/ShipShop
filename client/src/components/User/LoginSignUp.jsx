@@ -17,6 +17,9 @@ const LoginSignUp = () => {
     const { error, loading, isAuthenticated } = useSelector(
         (state) => state.user
     )
+
+    console.log(loading)
+    
     const loginTab = useRef(null)
     const registerTab = useRef(null)
     const switcherTab = useRef(null)
@@ -76,7 +79,7 @@ const LoginSignUp = () => {
         if (isAuthenticated) {
             navigate("/account")
         }
-    }, [error, isAuthenticated, alert, navigate])
+    }, [dispatch, error, alert, navigate, isAuthenticated])
 
     const switchTabs = (e, tab) => {
         if (tab === "login") {
