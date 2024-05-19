@@ -9,7 +9,6 @@ export const cartSlice = createSlice({
     reducers: {
         ADD_TO_CART: (state, action) => {
             const item = action.payload;
-
             const isItemExist = state.cartItems.find(
                 (i) => i.product === item.product
             );
@@ -23,7 +22,7 @@ export const cartSlice = createSlice({
             }
             else {
                 {
-                    state.cartItems = [...state.cartItems, item]
+                    state.cartItems.push(item);
 
                 }
             }
@@ -39,4 +38,4 @@ export const cartSlice = createSlice({
 
 export const cartReducer = cartSlice.reducer
 
-export const { ADD_TO_CART, REMOVE_CART_ITEM, SAVE_SHIPPING_INFO } = cartReducer.action
+export const { ADD_TO_CART, REMOVE_CART_ITEM, SAVE_SHIPPING_INFO } = cartSlice.actions

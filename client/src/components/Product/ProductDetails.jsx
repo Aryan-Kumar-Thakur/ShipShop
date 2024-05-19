@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "../../../node_modules/bootstrap/dist/js/bootstrap.min.js"
 import "./productDetails.css"
@@ -8,9 +8,10 @@ import { useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component"
 import ReviewCard from './ReviewCard.jsx'
 import Loader from '../layout/loader/Loader.jsx'
-import {useAlert} from "react-alert"
+import { useAlert } from "react-alert"
 import { CLEAR_ERRORS } from '../../slice/productSlice.jsx'
 import MetaData from '../layout/MetaData.jsx'
+import { addItemsToCart } from '../../actions/cartActions.jsx'
 
 const productDetails = () => {
   const dispatch = useDispatch();
@@ -23,10 +24,8 @@ const productDetails = () => {
 
   const { id } = useParams();
 
-  console.log(id)
-
   useEffect(() => {
-    if(error){
+    if (error) {
       alert.error(error);
       dispatch(CLEAR_ERRORS())
     }
@@ -42,29 +41,48 @@ const productDetails = () => {
     isHalf: true,
   }
 
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    if (quantity < product.stock) {
+      setQuantity(quantity + 1);
+    }
+  }
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  }
+
+
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity))
+    alert.success("Item aded to cart")
+  }
+
 
   return (
     <>
       {loading ? (<Loader />) : (
         <>
-        <MetaData title={`${product.name} -- SHIPSHOP`}></MetaData>
+          <MetaData title={`${product.name} -- SHIPSHOP`}></MetaData>
           <div className="ProductDetails">
             <div>
-              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
+              <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-inner">
                   {product.images &&
                     product.images.map((item, i) => (
-                      <div className="carousel-item active">
+                      <div key={i} className="carousel-item active">
                         <img src={item.url} className="d-block w-100" alt="..." />
                       </div>
                     ))}
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+                  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
                   </button>
                 </div>
               </div>
@@ -83,11 +101,11 @@ const productDetails = () => {
                 <h1>{`₹${product.price}`}</h1>
                 <div className='detailsBlock-3-1'>
                   <div className="detailsBlock-3-1-1">
-                    <button>-</button>
-                    <input value="1" type="number" />
-                    <button>+</button>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <input readOnly value={quantity} type="number" />
+                    <button onClick={increaseQuantity}>+</button>
                   </div>
-                  <button>Add to Cart</button>
+                  <button onClick={addToCartHandler}>Add to Cart</button>
                 </div>
                 <p>
                   Status:{` `}
@@ -107,7 +125,7 @@ const productDetails = () => {
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">
               {product.reviews &&
-                product.reviews.map((review) => <ReviewCard review={review} />)}
+                product.reviews.map((review) => <ReviewCard key={review._id} review={review} />)}
             </div>
           ) : (
             <p className="noReviews">No Reviews Yet</p>

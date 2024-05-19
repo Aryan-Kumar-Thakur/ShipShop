@@ -4,8 +4,16 @@ import { legacy_createStore as createStore } from 'redux'
 import { productsReducer, productDetailsReducer } from "../slice/productSlice"
 import { forgotPasswordReducer, profileReducer, userReducer } from "../slice/userSlice"
 import { forgotPassword } from "../actions/userActions"
+import { cartReducer } from "../slice/cartSlice"
 
-const initialState = {}
+const initialState = {
+    cart: {
+        cartItems : localStorage.getItem("cartItems") ?
+        JSON.parse(localStorage.getItem("cartItems")) : [],
+        shippingInfo: localStorage.getItem("shippingInfo") ?
+        JSON.parse(localStorage.getItem("shippingInfo")) : {},
+    },
+}
 
 const middleware = [thunk]
 const rootReducer = {
@@ -14,6 +22,7 @@ const rootReducer = {
     user: userReducer,
     profile: profileReducer,
     forgotPassword: forgotPasswordReducer,
+    cart: cartReducer,
 }
 
 const store = configureStore({

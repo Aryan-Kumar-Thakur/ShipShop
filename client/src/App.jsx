@@ -18,6 +18,9 @@ import UpdateProfile from './components/User/UpdateProfile'
 import UpdatePassword from './components/User/UpdatePassword'
 import ForgotPassword from './components/User/ForgotPassword'
 import ResetPassword from './components/User/ResetPassword'
+import Cart from './components/Cart/Cart'
+import Shipping from './components/Cart/Shipping'
+import ConfirmOrder from './components/Cart/ConfirmOrder'
 
 const App = () => {
 
@@ -44,7 +47,10 @@ const App = () => {
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/about" element={<Header />}></Route>
             <Route path="/search" element={<Search />}></Route>
-            <Route path="/cart" element={<Header />}></Route>
+            <Route path='/cart' element={<Cart/>}></Route>
+            <Route path="/login/shipping" element={<ProtectedRoute><Shipping /></ProtectedRoute>}></Route>
+            <Route path="/order/confirm" element={<ConfirmOrder />}></Route>
+            <Route path="/login/shipping" element={<ProtectedRoute><Shipping /></ProtectedRoute>}></Route>
             <Route path="/account" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
             <Route path="/me/update" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>}></Route>
             <Route path="/password/update" element={<ProtectedRoute><UpdatePassword /></ProtectedRoute>}></Route>
