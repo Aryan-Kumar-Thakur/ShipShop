@@ -19,6 +19,8 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/styles": "^5.15.15",
     "@reduxjs/toolkit": "^2.2.3",
+    "@stripe/react-stripe-js": "^2.7.1",
+    "@stripe/stripe-js": "^3.4.1",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "overlay-navbar": "^1.2.3",
