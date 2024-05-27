@@ -25,6 +25,9 @@ import axios from 'axios'
 import Payment from './components/Cart/Payment'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import OrderSuccess from './components/Cart/OrderSuccess'
+import MyOrders from './components/Order/MyOrders'
+import OrderDetails from './components/Order/OrderDetails'
 
 const App = () => {
 
@@ -82,6 +85,9 @@ const App = () => {
             <Route path="/login/shipping" element={<ProtectedRoute><Shipping /></ProtectedRoute>}></Route>
             <Route path="/order/confirm" element={<ConfirmOrder />}></Route>
             {stripeApiKey && <Route path="/process/payment" element={<ProtectedRoute><PaymentWrapper /></ProtectedRoute>}></Route>}
+            {<Route path="/success" element={<ProtectedRoute><OrderSuccess/></ProtectedRoute>}></Route>}
+            {<Route path="/orders" element={<ProtectedRoute><MyOrders/></ProtectedRoute>}></Route>}
+            {<Route path="/order/:id" element={<ProtectedRoute><OrderDetails/></ProtectedRoute>}></Route>}
             <Route path="/account" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
             <Route path="/me/update" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>}></Route>
             <Route path="/password/update" element={<ProtectedRoute><UpdatePassword /></ProtectedRoute>}></Route>

@@ -5,6 +5,7 @@ import { productsReducer, productDetailsReducer } from "../slice/productSlice"
 import { forgotPasswordReducer, profileReducer, userReducer } from "../slice/userSlice"
 import { forgotPassword } from "../actions/userActions"
 import { cartReducer } from "../slice/cartSlice"
+import { myOrdersReducer, newOrderReducer, orderDetailsReducer } from "../slice/orderSlice"
 
 const initialState = {
     cart: {
@@ -23,6 +24,9 @@ const rootReducer = {
     profile: profileReducer,
     forgotPassword: forgotPasswordReducer,
     cart: cartReducer,
+    newOrder: newOrderReducer,
+    myOrders: myOrdersReducer,
+    orderDetails: orderDetailsReducer
 }
 
 const store = configureStore({

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import "./payment.css"
 import MetaData from '../layout/MetaData'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,6 +11,7 @@ import axios from 'axios';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import EventIcon from '@mui/icons-material/Event';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { createOrder , clearErrors } from '../../actions/orderActions';
 
 
 const Payment = () => {
@@ -26,13 +27,22 @@ const Payment = () => {
 
     const { shippingInfo, cartItems } = useSelector((state) => state.cart)
     const { user } = useSelector((state) => state.user)
-    // const { error } = useSelector((state) => state.newOrder)
+    const { error } = useSelector((state) => state.newOrder)
 
     const API_URI = "http://localhost:8000/api/v1";
 
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100),
         description: "Payment at Food-IFY",
+    }
+
+    const order = {
+        shippingInfo,
+        orderItems: cartItems,
+        itemPrice: orderInfo.subtotal,
+        taxPrice: orderInfo.tax,
+        shippingPrice: orderInfo.shippingCharges,
+        totalPrice: orderInfo.totalPrice
     }
 
     // indian card number :  4000003560000008
@@ -84,6 +94,11 @@ const Payment = () => {
             else {
                 console.log(result.paymentIntent.status)
                 if (result.paymentIntent.status === "succeeded") {
+                    order.paymentInfo={
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status,
+                    }
+                    dispatch(createOrder(order))
                     navigate("/success")
                 }
                 else {
@@ -96,6 +111,13 @@ const Payment = () => {
             alert.error(error)
         }
     }
+
+    useEffect(()=>{
+        if(error){
+            alert.error(error)
+            dispatch(clearErrors())
+        }
+    },[dispatch,error,alert])
 
     return (
         <>

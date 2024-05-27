@@ -134,7 +134,7 @@ export const allOrdersReducer = allOrdersSlice.reducer;
 export const orderReducer = orderSlice.reducer;
 export const orderDetailsReducer = orderDetailsSlice.reducer
 
-export const { CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL } = newOrderSlice.actions
+export const { CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL, CLEAR_ERRORS } = newOrderSlice.actions
 
 export const { MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, MY_ORDERS_FAIL } = myOrdersSlice.actions
 
