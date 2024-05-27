@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ALL_PRODUCT_REQUEST , ALL_PRODUCT_SUCCESS , ALL_PRODUCT_FAIL , CLEAR_ERRORS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS } from "../slice/productSlice";
+import { ALL_PRODUCT_REQUEST , ALL_PRODUCT_SUCCESS , ALL_PRODUCT_FAIL , ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CLEAR_ERRORS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS } from "../slice/productSlice";
 import {PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_SUCCESS} from "../slice/productSlice" 
 
 const API_URI = "http://localhost:8000/api/v1";
@@ -20,6 +20,24 @@ export const getProducts = (keyword = "",currentPage=1,price = [0,25000], catego
           dispatch(ALL_PRODUCT_SUCCESS(data));
       } catch (error) {
           dispatch(ALL_PRODUCT_FAIL(error.response.data.message));
+      }
+  };
+};
+
+export const getAdminProducts = () => {
+  return async (dispatch) => {
+      try {
+          dispatch(ADMIN_PRODUCT_REQUEST());
+
+          let link = `${API_URI}/admin/products`
+
+          const config = {withCredentials: true}
+          
+          const { data } = await axios.get(link,config);
+
+          dispatch(ADMIN_PRODUCT_SUCCESS(data.products));
+      } catch (error) {
+          dispatch(ADMIN_PRODUCT_FAIL(error.response.data.message));
       }
   };
 };

@@ -28,6 +28,9 @@ import { loadStripe } from '@stripe/stripe-js'
 import OrderSuccess from './components/Cart/OrderSuccess'
 import MyOrders from './components/Order/MyOrders'
 import OrderDetails from './components/Order/OrderDetails'
+import Dashboard from './components/Admin/Dashboard'
+import ProductList from './components/Admin/ProductList'
+import NewProduct from './components/Admin/NewProduct'
 
 const App = () => {
 
@@ -94,6 +97,9 @@ const App = () => {
             <Route path='/password/forgot' element={<ForgotPassword />}></Route>
             <Route path='/password/reset/:token' element={<ResetPassword />}></Route>
             <Route path="/login" element={<LoginSignUp />}></Route>
+            <Route path="/admin/dashboard" element={<ProtectedRoute isAdmin={true}><Dashboard /></ProtectedRoute>}></Route>
+            <Route path="/admin/products" element={<ProtectedRoute isAdmin={true}><ProductList /></ProtectedRoute>}></Route>
+            <Route path="/admin/product" element={<ProtectedRoute isAdmin={true}><NewProduct /></ProtectedRoute>}></Route>
           </Routes>
           <Footer />
         </BrowserRouter>

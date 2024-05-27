@@ -17,8 +17,6 @@ const LoginSignUp = () => {
     const { error, loading, isAuthenticated } = useSelector(
         (state) => state.user
     )
-
-    console.log(loading)
     
     const loginTab = useRef(null)
     const registerTab = useRef(null)

@@ -33,6 +33,31 @@ export const productsSlice = createSlice({
     },
 });
 
+export const adminProductsSlice = createSlice({
+    name: "adminProducts",
+    initialState: {
+        products: [],
+        loading: false,
+        error: null
+    },
+    reducers: {
+        ADMIN_PRODUCT_REQUEST: (state) => {
+            state.loading = true;
+            state.products = [];
+            state.error = null;
+        },
+        ADMIN_PRODUCT_SUCCESS: (state, action) => {
+            state.loading = false;
+            state.products = action.payload;
+        },
+        ADMIN_PRODUCT_FAIL: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+            state.products = [];
+        },
+    },
+});
+
 export const newProductSlice = createSlice({
     name: "newProduct",
     initialState: {
@@ -192,6 +217,7 @@ export const reviewSlice = createSlice({
 
 
 export const productsReducer = productsSlice.reducer;
+export const adminProductsReducer = adminProductsSlice.reducer;
 export const newProductReducer = newProductSlice.reducer;
 export const productReducer = productSlice.reducer;
 export const productDetailsReducer = productDetailsSlice.reducer;
@@ -200,6 +226,8 @@ export const productReviewsReducer = productReviewsSlice.reducer
 export const reviewReducer = reviewSlice.reducer
 
 export const { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, CLEAR_ERRORS } = productsSlice.actions;
+
+export const { ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL } = adminProductsSlice.actions;
 
 export const { NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL, NEW_PRODUCT_RESET } = newProductSlice.actions;
 

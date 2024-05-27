@@ -17,8 +17,6 @@ const Cart = () => {
     (state) => state.cart
   )
 
-  console.log(cartItems)
-
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
