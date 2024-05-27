@@ -138,7 +138,7 @@ export const newReviewSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
-        NEW_REVIEW_RESET: (action) => {
+        NEW_REVIEW_RESET: (state) => {
             state.success = false;
         }
     }

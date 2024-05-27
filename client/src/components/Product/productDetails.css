@@ -11,10 +11,12 @@
 
 .carousel-inner {
     width: 20vw !important;
+    /* height: 40vh !important; */
 }
 
 .carousel-item {
     width: 20vmax !important;
+    /* height: 40vmin !important; */
 }
 
 .carousel-control-prev-icon,
@@ -154,7 +156,7 @@
     background-color: rgb(197, 68, 45);
     transform: scale(1.1);
 }
-/* .submitDialog {
+.submitDialog {
     display: flex;
     flex-direction: column;
 }
@@ -165,7 +167,7 @@
     outline: none;
     padding: 1rem;
     font: 300 1rem "Roboto";
-} */
+}
 
 .reviewsHeading {
     color: #000000be;

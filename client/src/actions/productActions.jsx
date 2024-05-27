@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ALL_PRODUCT_REQUEST , ALL_PRODUCT_SUCCESS , ALL_PRODUCT_FAIL , CLEAR_ERRORS } from "../slice/productSlice";
+import { ALL_PRODUCT_REQUEST , ALL_PRODUCT_SUCCESS , ALL_PRODUCT_FAIL , CLEAR_ERRORS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS } from "../slice/productSlice";
 import {PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_SUCCESS} from "../slice/productSlice" 
 
 const API_URI = "http://localhost:8000/api/v1";
@@ -37,6 +37,27 @@ export const getProductsDetails = (id) => {
       }
   };
 };
+
+// New Review
+export const newReview = (reviewData)=>{
+  return async(dispatch)=>{
+    try {
+      dispatch(NEW_REVIEW_REQUEST())
+
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true }
+
+      const {data} = await axios.put(
+        `${API_URI}/review`,
+        reviewData,
+        config
+      )
+
+      dispatch(NEW_REVIEW_SUCCESS(data.success))
+    } catch (error) {
+      dispatch(NEW_REVIEW_FAIL(error.response.data.message))
+    }
+  }
+}
 
 
 

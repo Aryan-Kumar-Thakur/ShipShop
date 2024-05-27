@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { thunk } from 'redux-thunk'
 import { legacy_createStore as createStore } from 'redux'
-import { productsReducer, productDetailsReducer } from "../slice/productSlice"
+import { productsReducer, productDetailsReducer, newReviewReducer } from "../slice/productSlice"
 import { forgotPasswordReducer, profileReducer, userReducer } from "../slice/userSlice"
 import { forgotPassword } from "../actions/userActions"
 import { cartReducer } from "../slice/cartSlice"
@@ -26,7 +26,8 @@ const rootReducer = {
     cart: cartReducer,
     newOrder: newOrderReducer,
     myOrders: myOrdersReducer,
-    orderDetails: orderDetailsReducer
+    orderDetails: orderDetailsReducer,
+    newReview : newReviewReducer,
 }
 
 const store = configureStore({
