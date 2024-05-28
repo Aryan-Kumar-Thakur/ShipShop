@@ -64,6 +64,7 @@ export const newProductSlice = createSlice({
         product: {},
         loading: false,
         error: null,
+        success: false
     },
     reducers: {
         NEW_PRODUCT_REQUEST: (state) => {

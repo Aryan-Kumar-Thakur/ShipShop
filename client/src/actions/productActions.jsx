@@ -1,8 +1,10 @@
 import axios from "axios"
-import { ALL_PRODUCT_REQUEST , ALL_PRODUCT_SUCCESS , ALL_PRODUCT_FAIL , ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CLEAR_ERRORS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS } from "../slice/productSlice";
+import { ALL_PRODUCT_REQUEST , ALL_PRODUCT_SUCCESS , ALL_PRODUCT_FAIL , ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CLEAR_ERRORS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL } from "../slice/productSlice";
 import {PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_SUCCESS} from "../slice/productSlice" 
 
 const API_URI = "http://localhost:8000/api/v1";
+
+//get Products
 
 export const getProducts = (keyword = "",currentPage=1,price = [0,25000], category, ratings = 0) => {
   return async (dispatch) => {
@@ -24,6 +26,8 @@ export const getProducts = (keyword = "",currentPage=1,price = [0,25000], catego
   };
 };
 
+// get Products - Admin
+
 export const getAdminProducts = () => {
   return async (dispatch) => {
       try {
@@ -42,6 +46,32 @@ export const getAdminProducts = () => {
   };
 };
 
+// Create New Product - Admin
+
+export const createProduct = (productData)=>{
+  return async(dispatch)=>{
+    try {
+      dispatch(NEW_PRODUCT_REQUEST())
+
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true }
+
+      console.log(productData)
+
+      const {data} = await axios.post(
+        `${API_URI}/admin/product/new`,
+        productData,
+        config
+      )
+
+      dispatch(NEW_PRODUCT_SUCCESS(data))
+    } catch (error) {
+      dispatch(NEW_PRODUCT_FAIL(error.response.data.message))
+    }
+  }
+}
+
+// get product details
+
 export const getProductsDetails = (id) => {
   return async (dispatch) => {
       try {
@@ -55,6 +85,7 @@ export const getProductsDetails = (id) => {
       }
   };
 };
+
 
 // New Review
 export const newReview = (reviewData)=>{

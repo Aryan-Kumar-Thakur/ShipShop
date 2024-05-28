@@ -2,10 +2,36 @@ import Product from "../models/productModel.js"
 import ErrorHandler from "../utils/errorHandler.js";
 import catchAsyncError from "../middleware/catchAsyncError.js";
 import ApiFeatures from "../utils/apiFeatures.js";
+import cloudinary from "cloudinary"
 
 // Create Product --> Admin
 const createProduct = catchAsyncError(async (req, res, next) => {
 
+    // console.log(req.body)
+
+    let images = []
+
+    if (typeof(req.body.images) === "string") {
+        images.push(req.body.images)
+    }
+    else {
+        images = req.body.images
+    }
+
+    const imagesLink = []
+
+    for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.v2.uploader.upload(images[i], {
+            folder: "products",
+        })
+
+        imagesLink.push({
+            public_id : result.public_id,
+            url: result.secure_url
+        })
+    }
+
+    req.body.images = imagesLink
     req.body.user = req.user.id
     const product = await Product.create(req.body);
 
@@ -28,10 +54,10 @@ const getAllproducts = catchAsyncError(async (req, res, next) => {
     let products = await apiFeature.query
 
     let filteredProductsCount = products.length;
-    
+
     apiFeature.pagination(resultPerPage)
 
-    products=await apiFeature.query.clone()
+    products = await apiFeature.query.clone()
 
     res.status(200).json({
         success: true,
