@@ -19,6 +19,8 @@ const OrderList = () => {
 
   const { error, orders } = useSelector((state) => state.allOrder)
 
+  console.log(orders)
+
   const { error: deleteError, isDeleted } = useSelector((state) => state.order)
 
   const deleteOrderHandler = (id) => {

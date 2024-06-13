@@ -8,7 +8,13 @@ import {
     FORGOT_PASSWORD_FAIL,
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
-    RESET_PASSWORD_FAIL
+    RESET_PASSWORD_FAIL,
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL,
+    ALL_USERS_REQUEST,
+    ALL_USERS_SUCCESS,
+    ALL_USERS_FAIL
 } from "../slice/userSlice"
 
 import {
@@ -173,6 +179,85 @@ export const updatePassword = (passwords) => {
         }
     }
 }
+
+// get All Users
+export const getAllUsers = () => {
+    return async (dispatch) => {
+        try {
+            dispatch(ALL_USERS_REQUEST());
+
+            const config = { withCredentials: true }
+            const { data } = await axios.get(
+                `${API_URI}/admin/user`,
+                config
+            );
+
+            dispatch(ALL_USERS_SUCCESS(data.users));
+        } catch (error) {
+            dispatch(ALL_USERS_FAIL(error.response.data.message));
+        }
+    }
+};
+
+// get  User Details
+export const getUserDetails = (id) => {
+    return async (dispatch) => {
+        try {
+            dispatch(USER_DETAILS_REQUEST());
+
+            const config = { withCredentials: true }
+            const { data } = await axios.get(
+                `${API_URI}/admin/user/${id}`,
+                config
+            );
+
+            dispatch(USER_DETAILS_SUCCESS(data.user));
+        } catch (error) {
+            dispatch(USER_DETAILS_FAIL(error.response.data.message));
+        }
+    }
+};
+
+// Update User
+export const updateUser = (id, userData) => {
+    return async (dispatch) => {
+        try {
+            dispatch(UPDATE_USER_REQUEST());
+
+            const config = { headers: { "Content-Type": "application/json" }, withCredentials: true }
+
+            const { data } = await axios.put(
+                `${API_URI}/admin/user/${id}`,
+                userData,
+                config
+            );
+
+            dispatch(UPDATE_USER_SUCCESS(data.success));
+        } catch (error) {
+            dispatch(UPDATE_USER_FAIL(error.response.data.message));
+        }
+    }
+};
+
+// Delete User
+export const deleteUser = (id) => {
+    return async (dispatch) => {
+        try {
+            dispatch(DELETE_USER_REQUEST());
+
+            const config = { withCredentials: true }
+
+            const { data } = await axios.delete(
+                `${API_URI}/admin/user/${id}`,
+                config
+            );
+
+            dispatch(DELETE_USER_SUCCESS(data));
+        } catch (error) {
+            dispatch(DELETE_USER_FAIL(error.response.data.message));
+        }
+    }
+};
 
 
 

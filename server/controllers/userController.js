@@ -277,5 +277,6 @@ const deleteUser = (catchAsyncError(async (req, res, next) => {
 
 
 
+
 export default registerUser
 export { loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updatePassword, updateProfile, getSingleUser, getAllUser, updateUserRole, deleteUser }
