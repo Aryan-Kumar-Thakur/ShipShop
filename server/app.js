@@ -44,6 +44,10 @@ app.use("/api/v1",userRoutes)
 app.use("/api/v1",orderRoutes)
 app.use("/api/v1",paymentRoutes)
 
+app.get("/",(req,res)=>{
+    res.send("welcome to home page")
+})
+
 // Middleware for error
 
 app.use(errorMiddleware)
