@@ -21,8 +21,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(fileUpload())
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "/client/dist")));
+
 
 app.use(cors({
     origin: process.env.FRONTEND_URL, //allow request only from these site
