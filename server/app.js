@@ -25,7 +25,7 @@ const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.use(cors({
-    origin: 'http://localhost:3000', //allow request only from these site
+    origin: process.env.FRONTEND_URL, //allow request only from these site
     methods: ["GET","POST","PUT","DELETE"],
     credentials: true, //for getting cookies and other headers from backend
     samesite : "none",
