@@ -29,7 +29,7 @@ const Shipping = () => {
   const [state, setState] = useState(shippingInfo.state)
   const [country, setCountry] = useState(shippingInfo.country)
   const [pinCode, setPinCode] = useState(shippingInfo.pinCode)
-  const [phoneNo, setPhoneNo] = useState(shippingInfo.pinCode)
+  const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo)
 
   const shippingSubmit = (e) => {
     e.preventDefault();

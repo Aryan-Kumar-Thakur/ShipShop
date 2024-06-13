@@ -26,6 +26,7 @@ const OrderDetails = () => {
     }
     dispatch(getOrderDetails(id))
   }, [error, dispatch, alert, id])
+  
   return (
     <>
       <>

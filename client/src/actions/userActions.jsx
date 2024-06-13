@@ -18,7 +18,7 @@ import {
     UPDATE_PASSWORD_RESET, UPDATE_USER_RESET, DELETE_USER_RESET
 } from "../slice/userSlice"
 
-const API_URI = "http://localhost:8000/api/v1";
+const API_URI = "/api/v1";
 
 //login
 export const login = (email, password) => {

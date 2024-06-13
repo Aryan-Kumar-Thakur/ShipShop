@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { DataGrid, renderActionsCell } from '@mui/x-data-grid';
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getAdminProducts } from "../../actions/productActions";
-import { Link } from "react-router-dom";
+import { clearErrors, getAdminProducts, deleteProduct } from "../../actions/productActions";
+import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
@@ -15,8 +15,15 @@ import { DELETE_PRODUCT_RESET } from "../../slice/productSlice";
 const ProductList = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const navigate = useNavigate()
 
   const {error, products} = useSelector((state) => state.adminProducts)
+
+  const {error:deleteError , isDeleted} = useSelector((state)=>state.product)
+
+  const deleteProductHandler = (id)=>{
+    dispatch(deleteProduct(id));
+  }
 
 
   useEffect(()=>{
@@ -24,9 +31,18 @@ const ProductList = () => {
       alert.error(error)
       dispatch(clearErrors());
     }
+    if(deleteError){
+      alert.error(deleteError)
+      dispatch(clearErrors());
+    }
+    if(isDeleted){
+      alert.success("Product Deleted Successfully")
+      navigate("/admin/products")
+      dispatch(DELETE_PRODUCT_RESET())
+    }
 
     dispatch(getAdminProducts())
-  },[error,dispatch, alert])
+  },[error,dispatch, alert, deleteError, isDeleted, navigate])
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -41,7 +57,7 @@ const ProductList = () => {
             <Link to={`/admin/product/${params.id}`}>
               <EditIcon />
             </Link>
-            <Button><DeleteIcon /></Button>
+            <Button onClick={()=>deleteProductHandler(params.id)}><DeleteIcon /></Button>
           </>
         )
       }
@@ -68,9 +84,12 @@ const ProductList = () => {
         <div className="productListContainer">
           <h1 className="productListHeading">ALL PRODUCTS</h1>
 
-          <DataGrid rows={rows} columns={columns} pageSizeOptions={10} disableRowSelectionOnClick
+          <DataGrid rows={rows} columns={columns} pageSizeOptions={[10]}
+          initialState={{
+          pagination: { paginationModel: { pageSize: 10 } },
+        }}
+           disableRowSelectionOnClick
             className="productListTable" autoHeight />
-
         </div>
       </div>
     </>

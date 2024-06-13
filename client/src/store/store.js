@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { thunk } from 'redux-thunk'
 import { legacy_createStore as createStore } from 'redux'
-import { productsReducer, productDetailsReducer, newReviewReducer, adminProductsReducer, newProductReducer } from "../slice/productSlice"
+import { productsReducer, productDetailsReducer, newReviewReducer, adminProductsReducer, newProductReducer, productReducer } from "../slice/productSlice"
 import { forgotPasswordReducer, profileReducer, userReducer } from "../slice/userSlice"
 import { forgotPassword } from "../actions/userActions"
 import { cartReducer } from "../slice/cartSlice"
-import { myOrdersReducer, newOrderReducer, orderDetailsReducer } from "../slice/orderSlice"
+import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer } from "../slice/orderSlice"
 
 const initialState = {
     cart: {
@@ -30,6 +30,9 @@ const rootReducer = {
     newReview : newReviewReducer,
     adminProducts: adminProductsReducer,
     newProduct: newProductReducer,
+    product: productReducer,
+    allOrder: allOrdersReducer,
+    order: orderReducer,
 }
 
 const store = configureStore({

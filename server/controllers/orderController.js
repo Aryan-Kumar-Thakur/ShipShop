@@ -92,14 +92,16 @@ const updateOrder = catchAsyncError(async (req, res, next) => {
     }
 
     order.orderStatus = req.body.status;
+    
+    console.log(req.body.status)
 
-    if(req.body.status === "Shipped"){
+    if(req.body.status === "shipped"){
         order.orderItems.forEach(async (o) => {
             await updateStock(o.product, o.quantity);
         })
     }
 
-    if (req.body.status === "Delievered") {
+    if (req.body.status === "delievered") {
         order.deliveredAt = Date.now();
     }
 

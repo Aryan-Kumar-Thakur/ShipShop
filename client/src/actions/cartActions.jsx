@@ -1,7 +1,7 @@
 import { ADD_TO_CART, REMOVE_CART_ITEM, SAVE_SHIPPING_INFO } from "../slice/cartSlice";
 import axios from "axios";
 
-const API_URI = "http://localhost:8000/api/v1";
+const API_URI = "/api/v1";
 
 // Add to cart
 
