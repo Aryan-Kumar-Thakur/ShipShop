@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import dotenv from 'dotenv'
 
 if (process.env.NODE_ENV !== "PRODUCTION") {
-    dotenv.config({ path: "server/config/config.env" })
+    dotenv.config({ path: "config/config.env" })
 }
 else {
     dotenv.config()
