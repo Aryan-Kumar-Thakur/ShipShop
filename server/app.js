@@ -24,7 +24,7 @@ app.use(fileUpload())
 
 
 app.use(cors({
-    origin: ['https://ship-shop-git-main-aryans-projects-f0c479ee.vercel.app'], //allow request only from these site
+    origin: [process.env.FRONTEND_URL], //allow request only from these site
     methods: ["GET","POST","PUT","DELETE"],
     credentials: true, //for getting cookies and other headers from backend
 }))
