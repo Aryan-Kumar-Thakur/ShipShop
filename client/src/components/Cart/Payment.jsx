@@ -13,6 +13,8 @@ import EventIcon from '@mui/icons-material/Event';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { createOrder , clearErrors } from '../../actions/orderActions';
 
+import { baseUrl } from '../../constants/BaseUrl';
+
 
 const Payment = () => {
 
@@ -29,7 +31,7 @@ const Payment = () => {
     const { user } = useSelector((state) => state.user)
     const { error } = useSelector((state) => state.newOrder)
 
-    const API_URI = "http://localhost:8000/api/v1";
+    const API_URI = `${baseUrl}/api/v1`;
 
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100),

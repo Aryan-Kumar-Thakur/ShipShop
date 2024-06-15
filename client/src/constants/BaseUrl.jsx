@@ -1,0 +1,1 @@
+export const baseUrl = 'https://shipshop-379s.onrender.com' ;

@@ -7,9 +7,9 @@ import {
     DELETE_ORDER_REQUEST, DELETE_ORDER_SUCCESS, DELETE_ORDER_FAIL, DELETE_ORDER_RESET
 } from "../slice/orderSlice"
 import { ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_DETAILS_FAIL } from "../slice/orderSlice"
+import { baseUrl } from "../constants/BaseUrl"
 
-
-const API_URI = "/api/v1";
+const API_URI = `${baseUrl}/api/v1`;
 
 export const createOrder = (order) => {
     return async (dispatch) => {

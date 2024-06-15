@@ -24,7 +24,9 @@ import {
     UPDATE_PASSWORD_RESET, UPDATE_USER_RESET, DELETE_USER_RESET
 } from "../slice/userSlice"
 
-const API_URI = "/api/v1";
+import { baseUrl } from "../constants/BaseUrl"
+
+const API_URI = `${baseUrl}/api/v1`;
 
 //login
 export const login = (email, password) => {

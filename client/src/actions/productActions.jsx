@@ -3,7 +3,9 @@ import { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, ADMIN_PRODU
 import { PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_SUCCESS } from "../slice/productSlice"
 import { DELETE_ORDER_FAIL } from "../slice/orderSlice";
 
-const API_URI = "/api/v1";
+import { baseUrl } from "../constants/BaseUrl"
+
+const API_URI = `${baseUrl}/api/v1`;
 
 //get Products
 

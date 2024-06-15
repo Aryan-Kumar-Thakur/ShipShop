@@ -37,10 +37,12 @@ import ProcessOrder from './components/Admin/ProcessOrder'
 import UsersList from './components/Admin/UserList'
 import UpdateUser from './components/Admin/UpdateUser'
 
+import { baseUrl } from './constants/BaseUrl'
+
 const App = () => {
 
 
-  const API_URI = "http://localhost:8000/api/v1";
+  const API_URI = `{baseUrl}/api/v1`;
 
   const [stripeApiKey, setStripeApiKey] = useState("");
 
