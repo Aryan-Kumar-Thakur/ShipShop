@@ -38,6 +38,7 @@ import UsersList from './components/Admin/UserList'
 import UpdateUser from './components/Admin/UpdateUser'
 
 import { baseUrl } from './constants/BaseUrl'
+import ProductReviews from './components/Admin/ProductReviews'
 
 const App = () => {
 
@@ -112,6 +113,7 @@ const App = () => {
             <Route path="/admin/orders/:id" element={<ProtectedRoute isAdmin={true}><ProcessOrder /></ProtectedRoute>}></Route>
             <Route path="/admin/users" element={<ProtectedRoute isAdmin={true}><UsersList /></ProtectedRoute>}></Route>
             <Route path="/admin/user/:id" element={<ProtectedRoute isAdmin={true}><UpdateUser /></ProtectedRoute>}></Route>
+            <Route path="/admin/reviews" element={<ProtectedRoute isAdmin={true}><ProductReviews /></ProtectedRoute>}></Route>
           </Routes>
           <Footer />
         </BrowserRouter>

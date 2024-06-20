@@ -32,13 +32,20 @@ const Home = () => {
         <>
           <MetaData title="SHIPSHOP" />
           <div className="banner">
+            {/* <p>Welcome to ShipShop</p> */}
+
+            <a href="#container">
+              <button>Scroll <CgMouse /></button>
+            </a>
+          </div>
+          {/* <div className="banner2">
             <p>Welcome to ShipShop</p>
             <h1>FIND AMAZING PRODUCTS BELOW</h1>
 
             <a href="#container">
               <button>Scroll <CgMouse /></button>
             </a>
-          </div>
+          </div> */}
           <h2 className="homeheading">Featured Products</h2>
           <div className="container" id="container">
             {products && products.map(product => (

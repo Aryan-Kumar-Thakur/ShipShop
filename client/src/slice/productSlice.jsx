@@ -197,14 +197,15 @@ export const reviewSlice = createSlice({
     initialState: {
         loading: false,
         error: null,
+        isDeleted: false
     },
     reducers: {
         DELETE_REVIEW_REQUEST: (state) => {
             state.loading = true;
         },
-        DELETE_REVIEW_REQUEST: (state, action) => {
+        DELETE_REVIEW_SUCCESS: (state, action) => {
             state.loading = false,
-                state.isDeleted = action.payload
+            state.isDeleted = action.payload
         },
         DELETE_REVIEW_FAIL: (state, action) => {
             state.loading = false;

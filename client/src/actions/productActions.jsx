@@ -1,6 +1,15 @@
 import axios from "axios"
-import { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CLEAR_ERRORS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_FAIL, UPDATE_PRODUCT_SUCCESS } from "../slice/productSlice";
+import {
+  ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, ADMIN_PRODUCT_REQUEST,
+  ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, CLEAR_ERRORS, NEW_REVIEW_FAIL, NEW_REVIEW_REQUEST,
+  NEW_REVIEW_SUCCESS, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_FAIL,
+  DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_SUCCESS, ALL_REVIEW_FAIL, ALL_REVIEW_REQUEST, ALL_REVIEW_SUCCESS,
+  DELETE_REVIEW_REQUEST, DELETE_REVIEW_SUCCESS, DELETE_REVIEW_FAIL
+} from "../slice/productSlice";
+
 import { PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_SUCCESS } from "../slice/productSlice"
+
 import { DELETE_ORDER_FAIL } from "../slice/orderSlice";
 
 import { baseUrl } from "../constants/BaseUrl"
@@ -152,6 +161,49 @@ export const newReview = (reviewData) => {
       dispatch(NEW_REVIEW_SUCCESS(data.success))
     } catch (error) {
       dispatch(NEW_REVIEW_FAIL(error.response.data.message))
+    }
+  }
+}
+
+// get all reviews -- Admin
+export const getAllReviews = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(ALL_REVIEW_REQUEST())
+
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true }
+
+
+      const { data } = await axios.get(
+        `${API_URI}/review?id=${id}`,
+        config,
+      )
+
+      dispatch(ALL_REVIEW_SUCCESS(data.reviews))
+    } catch (error) {
+      dispatch(ALL_REVIEW_FAIL(error.response.data.message))
+    }
+  }
+}
+
+//delete product reviews -- admin
+export const deleteReviews = (reviewId, productID) => {
+  return async (dispatch) => {
+    try {
+      dispatch(DELETE_REVIEW_REQUEST())
+
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true }
+
+      const { data } = await axios.delete(
+        `${API_URI}/review?id=${reviewId}&productID=${productID}`,
+        config,
+      )
+
+      // console.log(data.success)
+
+      dispatch(DELETE_REVIEW_SUCCESS(data.success))
+    } catch (error) {
+      dispatch(DELETE_REVIEW_FAIL(error.response.data.message))
     }
   }
 }

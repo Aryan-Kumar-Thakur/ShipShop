@@ -74,9 +74,12 @@ export const loadUser = () => {
         try {
             dispatch(LOAD_USER_REQUEST())
 
-            const { data } = await axios.get(`${API_URI}/me`, {
-                withCredentials: true
-            })
+            const config = { headers: { "Content-Type": "multipart/form-data" }, withCredentials: true }
+
+            const { data } = await axios.get(
+                `${API_URI}/me`,
+                config,
+            )
 
             dispatch(LOAD_USER_SUCCESS(data))
         } catch (error) {
@@ -148,7 +151,7 @@ export const resetPassword = (token, passwords) => {
         try {
             dispatch(RESET_PASSWORD_REQUEST())
 
-            const config = { headers: { "Content-Type": "multipart/form-data" }}
+            const config = { headers: { "Content-Type": "multipart/form-data" } }
             const { data } = await axios.put(
                 `${API_URI}/password/reset/${token}`,
                 passwords,

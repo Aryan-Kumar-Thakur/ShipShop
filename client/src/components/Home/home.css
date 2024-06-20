@@ -1,6 +1,9 @@
 .banner {
-    background-image: linear-gradient(to right, #635dc0, #3027ae);
-    height: 100vmin;
+    background: 
+    url('../../images/cover.jfif') left/50% 100% no-repeat, 
+    url('../../images/banner.jpg') right/50% 100% no-repeat,
+    linear-gradient(to right, transparent 49.5%, white 49.5%, white 50.5%, transparent 50.5%);
+    height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,8 +17,9 @@
     font: 600 2.5vmax "Roboto";
 }
 
-.banner>p1 {
+.banner>p {
     font: 300 1.4vmax "Lucida Sans";
+    color: red;
 }
 
 .banner a button {
@@ -35,7 +39,7 @@
     color: white;
 }
 
-.banner::after {
+/* .banner::after {
     content: "";
     width: 100vw;
     height: 105vmin;
@@ -45,7 +49,7 @@
     left: 0%;
     clip-path: polygon(100% 68%, -30% 100%, 100% 100%);
     max-width: 100%;
-}
+} */
 
 .homeheading {
     text-align: center;
@@ -58,7 +62,7 @@
     color: rgba(0, 0, 0, 0.7);
 }
 
-.container{
+.container {
     display: flex;
     margin: 2vmax auto;
     width: 80vw;
@@ -115,9 +119,9 @@
     transform: translateY(-1vmax);
 }
 
-@media screen and (max-width: 800px){
-    .banner::after{
-        height: 110vmin;
+@media screen and (max-width: 800px) {
+    .banner{
+        background: url('../../images/cover.jfif') left center/100% 100% no-repeat;
     }
 }
 
@@ -141,8 +145,8 @@
     }
 }
 
-@media screen and (max-width: 380px){
-    .banner::after{
+@media screen and (max-width: 420px) {
+    .banner::after {
         height: 115vmin;
     }
 }

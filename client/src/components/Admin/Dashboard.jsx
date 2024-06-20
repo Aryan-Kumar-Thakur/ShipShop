@@ -23,8 +23,6 @@ const Dashboard = () => {
 
   const { users } = useSelector((state) => state.allUsers);
 
-  console.log(orders)
-
   useEffect(() => {
     dispatch(getAdminProducts())
     dispatch(getAllOrders())
