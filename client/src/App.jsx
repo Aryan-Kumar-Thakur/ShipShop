@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, useSearchParams } from 'react-router-dom'
 import Header from "./components/layout/Header/Header"
 import Footer from "./components/layout/Footer/Footer"
 import Home from './components/Home/Home'
-import Contact from '../Pages/Contact'
 import Products from './components/Product/Products'
 import ProductDetails from './components/Product/ProductDetails'
 import Search from './components/Product/Search'
@@ -39,11 +38,13 @@ import UpdateUser from './components/Admin/UpdateUser'
 
 import { baseUrl } from './constants/BaseUrl'
 import ProductReviews from './components/Admin/ProductReviews'
+import Contact from './components/layout/Contact/Contact'
+import About from './components/layout/About/About'
 
 const App = () => {
 
 
-  const API_URI = `{baseUrl}/api/v1`;
+  const API_URI = `${baseUrl}/api/v1`;
 
   const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -90,7 +91,7 @@ const App = () => {
             <Route path="/products" element={<Products />}></Route>
             <Route path="/products/:keyword" element={<Products />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
-            <Route path="/about" element={<Header />}></Route>
+            <Route path="/about" element={<About />}></Route>
             <Route path="/search" element={<Search />}></Route>
             <Route path='/cart' element={<Cart />}></Route>
             <Route path="/login/shipping" element={<ProtectedRoute><Shipping /></ProtectedRoute>}></Route>
