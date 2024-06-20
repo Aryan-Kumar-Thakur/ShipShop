@@ -18,8 +18,8 @@ else {
 const app=express();
 
 app.use(cookieParser())
-app.use(express.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.json({limit: "500mb"}))
+app.use(bodyParser.urlencoded({limit: "500mb"}))
 app.use(fileUpload())
 
 
