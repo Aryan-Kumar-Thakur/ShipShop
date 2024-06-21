@@ -85,6 +85,7 @@
 
 .productCard>img {
     width: 16vmax;
+    height: 25vh;
 }
 
 .productCard>div {
@@ -126,6 +127,10 @@
 }
 
 @media screen and (max-width: 600px) {
+    .productCard>img {
+        height: 15vh;
+    }
+    
     .productCard>p {
         font-size: 1.7vmax;
     }
@@ -146,7 +151,7 @@
 }
 
 @media screen and (max-width: 420px) {
-    .banner::after {
-        height: 115vmin;
+    .productCard>img {
+        height: 15vh;
     }
 }

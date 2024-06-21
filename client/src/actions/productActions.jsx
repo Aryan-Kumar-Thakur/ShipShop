@@ -18,14 +18,14 @@ const API_URI = `${baseUrl}/api/v1`;
 
 //get Products
 
-export const getProducts = (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) => {
+export const getProducts = (keyword = "", currentPage = 1, price = [0, 100000], category, ratings = 0) => {
   return async (dispatch) => {
     try {
       dispatch(ALL_PRODUCT_REQUEST());
 
       let link = `${API_URI}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
 
-      if (category) {
+      if (category && category!=="All") {
         link = `${API_URI}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
       }
 

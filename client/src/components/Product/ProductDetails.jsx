@@ -122,7 +122,6 @@ const productDetails = () => {
               <div className="detailsBlock-1">
                 <h2>{product.name}</h2>
                 <p>Product # {product._id}</p>
-                <h4>{`From ${product.restaurant}`}</h4>
               </div>
               <div className="detailsBlock-2">
                 <Rating {...options} />

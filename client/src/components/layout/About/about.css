@@ -93,6 +93,12 @@
   }
   
   @media screen and (max-width: 600px) {
+    .aboutSection{
+      position: relative;
+    }
+    .aboutSectionContainer{
+      height: 90vh;
+    }
     .aboutSectionContainer > div {
       display: block;
     }
@@ -125,3 +131,9 @@
       margin: 1vmax;
     }
   }
+
+@media screen and (max-width: 400px){
+  .aboutSectionContainer{
+    height: 100vh;
+  }
+}

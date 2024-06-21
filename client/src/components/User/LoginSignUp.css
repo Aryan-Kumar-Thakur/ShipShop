@@ -80,6 +80,7 @@
     border-radius: 4px;
     font: 300 0.9vmax cursive;
     outline: none;
+    margin-bottom: 1vmax;
 }
 
 .loginForm>div>svg,
@@ -145,6 +146,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
 }
 
+.loginBtn{
+    margin-top: 1vmax;
+    margin-bottom: 2vmax;
+}
+
 .loginBtn:hover,
 .signUpBtn:hover {
     background-color: rgb(179, 66, 46);
@@ -166,6 +172,33 @@
     transform: translateX(100%);
 }
 
+.testLogin{
+    display: flex;
+    flex-direction: column;
+}
+
+.testLoginText{
+    font: 300 0.9vmax cursive;
+}
+
+.testLoginButton {
+    border: none;
+    background-color: tomato;
+    font: 500 1vmax "Roboto";
+    border-radius: 20px;
+    padding: 0.6vmax 2vmax;
+    margin: 0.5vmax 0;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
+    outline: none;
+}
+
+.testLoginButton:hover {
+    background-color: rgb(197, 68, 45);
+    transform: scale(1.1);
+}
+
 @media screen and (max-width: 1200px) {
     .LoginSignUpBox {
         width: 50vw;
@@ -184,6 +217,7 @@
         padding: 2.5vmax 5vmax;
         font: 300 1.7vmax cursive;
     }
+
     .loginForm>div>svg,
     .signUpForm>div>svg {
         font-size: 2.8vmax;
@@ -208,6 +242,15 @@
         font: 300 1.9vmax "Roboto";
         padding: 1.8vmax;
     }
+    .testLoginText{
+        font: 300 2vmax cursive;
+    }
+    .testLoginButton {
+        font: 500 1.7vmax "Roboto";
+        padding: 1.5vmax;
+        width: 20vmax;
+        margin: 3vmax 0;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -219,5 +262,31 @@
     .LoginSignUpBox {
         width: 100vw;
         height: 95vh;
+    }
+
+    .testLoginText{
+        font: 300 0.9vmax cursive;
+    }
+    
+    .testLoginButton {
+        border: none;
+        background-color: tomato;
+        font: 500 1vmax "Roboto";
+        border-radius: 20px;
+        padding: 0.6vmax 2vmax;
+        margin: 0.5vmax 0;
+        color: white;
+        cursor: pointer;
+        transition: all 0.5s;
+        outline: none;
+    }
+    .testLoginText{
+        font: 300 2vmax cursive;
+    }
+    .testLoginButton {
+        font: 500 1.7vmax "Roboto";
+        padding: 1.5vmax;
+        width: 20vmax;
+        margin: 3vmax 0;
     }
 }

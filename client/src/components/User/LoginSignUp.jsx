@@ -17,7 +17,7 @@ const LoginSignUp = () => {
     const { error, loading, isAuthenticated } = useSelector(
         (state) => state.user
     )
-    
+
     const loginTab = useRef(null)
     const registerTab = useRef(null)
     const switcherTab = useRef(null)
@@ -66,6 +66,11 @@ const LoginSignUp = () => {
         else {
             setUser({ ...user, [e.target.name]: e.target.value })
         }
+    }
+
+    const testLogin = () => {
+        setLoginEmail("testuser@test.com")
+        setLoginPassword("12345678")
     }
 
     const redirect = location.search ? location.search.split("=")[1] : "/account"
@@ -125,6 +130,10 @@ const LoginSignUp = () => {
                                 </div>
                                 <Link to="/password/forgot">Forgot Password ?</Link>
                                 <input type="submit" value="Login" className='loginBtn' />
+                                <div className='testLogin'>
+                                    <p className='testLoginText'>For Login As Test User</p>
+                                    <button className='testLoginButton' onClick={testLogin}>CLICK HERE</button>
+                                </div>
                             </form>
                             <form className='signUpForm' ref={registerTab} encType='multipart/form-data'
                                 onSubmit={registerSubmit}>

@@ -13,6 +13,7 @@ import { CLEAR_ERRORS } from '../../slice/productSlice'
 import MetaData from '../layout/MetaData'
 
 const categories = [
+    "All",
     "Laptop",
     "Footwear",
     "Bottom",
@@ -27,7 +28,7 @@ const Products = () => {
     const alert = useAlert()
 
     const [currentPage, setcurrentPage] = useState(1)
-    const [price, setPrice] = useState([0, 25000]);
+    const [price, setPrice] = useState([0, 100000]);
     const [category, setCategory] = useState('');
     const [ratings, setRating] = useState(0)
 
@@ -75,7 +76,7 @@ const Products = () => {
                                 valueLabelDisplay='auto'
                                 aria-labelledby="range-slider"
                                 min={0}
-                                max={25000}
+                                max={100000}
                             ></Slider>
                             <Typography>Categories</Typography>
                             <ul className="categoryBox">
