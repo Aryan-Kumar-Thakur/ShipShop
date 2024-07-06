@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./home.css"
 import { CgMouse } from "react-icons/cg"
 import ProductCard from './ProductCard'
@@ -17,9 +17,15 @@ const Home = () => {
   const { loading, error, products } = useSelector(
     (state) => state.products
   )
+  const [showAlert,setShowAlert] = useState(loading)
 
   useEffect(() => {
-    if(error){
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 10000);
+
+    if (error) {
       alert.error(error);
       dispatch(CLEAR_ERRORS())
     }
@@ -28,24 +34,15 @@ const Home = () => {
 
   return (
     <>
-      {loading ? <Loader/> :
+      {loading ? <Loader /> :
         <>
           <MetaData title="SHIPSHOP" />
           <div className="banner">
-            {/* <p>Welcome to ShipShop</p> */}
 
             <a href="#container">
               <button>Scroll <CgMouse /></button>
             </a>
           </div>
-          {/* <div className="banner2">
-            <p>Welcome to ShipShop</p>
-            <h1>FIND AMAZING PRODUCTS BELOW</h1>
-
-            <a href="#container">
-              <button>Scroll <CgMouse /></button>
-            </a>
-          </div> */}
           <h2 className="homeheading">Featured Products</h2>
           <div className="container" id="container">
             {products && products.map(product => (

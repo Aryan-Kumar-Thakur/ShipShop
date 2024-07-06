@@ -33,7 +33,6 @@ const Shipping = () => {
 
   const shippingSubmit = (e) => {
     e.preventDefault();
-    console.log(phoneNo.length)
     if (phoneNo.length !== 10) {
       alert.error("Phone Number Should be 10 Digits Long")
       return;
@@ -86,7 +85,6 @@ const Shipping = () => {
                 <select required value={state}
                   onChange={(e) => setState(e.target.value)}>
                   <option value="">State</option>
-                  {console.log(State.getStatesOfCountry(country))}
                   {State && State.getStatesOfCountry(country).map((item) => (
                     <option key={item.isoCode} value={item.isoCode}>{item.name}</option>
                   ))}

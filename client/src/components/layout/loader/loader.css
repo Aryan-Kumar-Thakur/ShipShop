@@ -1,11 +1,27 @@
 .loading{
     width: 100vw;
-    height: 100vh;
+    height: 60vh;
     background-color: white;
     display: grid;
     place-items: center;
     max-width: 100%;
 }
+
+.loadingText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loadingText h1{
+    font: 300 2vmax "Roboto";
+}
+
+.loadingText p{
+    font: 300 1vmax "Roboto";
+}
+
 
 .loading > div{
     width: 10vmax;
